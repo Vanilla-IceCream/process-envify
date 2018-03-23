@@ -1,0 +1,36 @@
+{
+  "name": "process-envify",
+  "version": "0.1.0",
+  "description": "A process env helper for injecting strings.",
+  "main": "dist/process-envify.cjs.js",
+  "module": "dist/process-envify.esm.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vanilla-IceCream/process-envify.git"
+  },
+  "keywords": [
+    "Gulp"
+  ],
+  "author": "Vanilla IceCream",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vanilla-IceCream/process-envify/issues"
+  },
+  "homepage": "https://github.com/Vanilla-IceCream/process-envify#readme",
+  "peerDependencies": {},
+  "dependencies": {},
+  "devDependencies": {
+    "babel-jest": "^22.4.3",
+    "babel-preset-env": "^1.6.1",
+    "coveralls": "^3.0.0",
+    "jest": "^22.4.3",
+    "regenerator-runtime": "^0.11.1",
+    "rollup": "^0.57.1",
+    "rollup-plugin-buble": "^0.19.2"
+  }
+}

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`process-envify should inject strings 1`] = `
+Object {
+  "process.env.NODE_ENV": "\\"test\\"",
+  "process.env.PORT": "3000",
+}
+`;
