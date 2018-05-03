@@ -26,5 +26,4 @@ function index (obj) {
 }
 
 export default index;
-export { polyfill };
 //# sourceMappingURL=process-envify.esm.js.map

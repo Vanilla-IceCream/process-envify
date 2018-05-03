@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var polyfill = function () {
   var reduce = Function.bind.call(Function.call, Array.prototype.reduce);
   var isEnumerable = Function.bind.call(Function.call, Object.prototype.propertyIsEnumerable);
@@ -29,6 +27,5 @@ function index (obj) {
   return envify;
 }
 
-exports.polyfill = polyfill;
-exports.default = index;
+module.exports = index;
 //# sourceMappingURL=process-envify.cjs.js.map
