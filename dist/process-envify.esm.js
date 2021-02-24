@@ -1,25 +1,19 @@
-var polyfill = function () {
-  var reduce = Function.bind.call(Function.call, Array.prototype.reduce);
-  var isEnumerable = Function.bind.call(Function.call, Object.prototype.propertyIsEnumerable);
-  var concat = Function.bind.call(Function.call, Array.prototype.concat);
-  var keys = Reflect.ownKeys;
-
-  if (!Object.values) {
-    Object.values = function values(O) {
-      return reduce(keys(O), function (v, k) { return concat(v, typeof k === 'string' && isEnumerable(O, k) ? [O[k]] : []); }, []);
-    };
-  }
-};
-
-function index (obj) {
-  polyfill();
+function index (data, opts) {
+  if ( opts === void 0 ) opts = {};
 
   var envify = {};
-  var keys = Object.keys(obj);
-  var values = Object.values(obj);
+  var keys = Object.keys(data);
+  var values = Object.values(data);
 
-  for (var i = 0, l = keys.length; i < l; i++) {
-    envify[("process.env." + (keys[i]))] = JSON.stringify(values[i]);
+  for (var i = 0, l = keys.length; i < l; i += 1) {
+    var key = keys[i];
+    var value = JSON.stringify(values[i]);
+
+    if (opts.useImportMeta) {
+      envify[("import.meta.env." + key)] = value;
+    } else {
+      envify[("process.env." + key)] = value;
+    }
   }
 
   return envify;

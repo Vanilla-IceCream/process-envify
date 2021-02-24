@@ -7,95 +7,182 @@ A process env helper for injecting strings.
 ```bash
 $ npm i process-envify -D
 # or
+$ pnpm i process-envify -D
+# or
 $ yarn add process-envify -D
 ```
 
 ## Usage
 
 ```js
-// input
-const foo = () => process.env.NODE_ENV;
-const bar = () => process.env.PORT;
+// Input:
+const getBookName = () => process.env.BOOK_NAME;
+
+// useImportMeta: true
+const getBookName = () => import.meta.env.BOOK_NAME;
 ```
 
-### Rollup
-
 ```js
-// rollup.config.js
-import replace from 'rollup-plugin-replace';
+// In your build tool (see below):
 import envify from 'process-envify';
 
-export default {
-  [...]
-  plugins: [
-    replace({
-      ...envify({
-        NODE_ENV: 'development',
-        PORT: 3000,
-      }),
-      // other ...
-    }),
-  ],
-  [...]
+envify({ BOOK_NAME: 'ECMAScript: Up and Running' });
+```
+
+```js
+// Output:
+const getBookName = () => 'ECMAScript: Up and Running';
+```
+
+### Vite (`vite.config.js`)
+
+```js
+import { defineConfig } from 'vite';
+import envify from 'process-envify';
+
+export default defineConfig({
+  define: envify(
+    { BOOK_NAME: 'ECMAScript: Up and Running' },
+    { useImportMeta: true },
+  ),
+});
+```
+
+### Vue CLI (`vue.config.js`)
+
+```js
+const envify = require('process-envify');
+
+module.exports = {
+  chainWebpack: (config) => {
+    config.plugin('define').tap((args) => {
+      Object.assign(
+        args[0],
+        envify({ BOOK_NAME: 'ECMAScript: Up and Running' }),
+      );
+
+      return args;
+    });
+  },
 };
 ```
 
+### CRACO (Create React App Configuration Override, `craco.config.js`)
+
 ```js
-// output
-const foo = () => 'development';
-const bar = () => 3000;
+const webpack = require('webpack');
+
+module.exports = {
+  webpack: {
+    configure: {
+      plugins: [
+        new webpack.DefinePlugin(
+          envify({ BOOK_NAME: 'ECMAScript: Up and Running' }),
+        ),
+      ],
+    },
+  },
+};
 ```
 
-### Webpack
+### Angular CLI (`angular.json`) + Angular Builders (`extra-webpack.config.js`)
+
+```json
+{
+  "architect": {
+    "serve": {
+      "builder": "@angular-builders/custom-webpack:dev-server",
+      "options": {
+        "customWebpackConfig": {
+          "path": "./extra-webpack.config.js"
+        }
+      }
+    },
+    "build": {
+      "builder": "@angular-builders/custom-webpack:browser",
+      "options": {
+        "customWebpackConfig": {
+          "path": "./extra-webpack.config.js"
+        }
+      }
+    }
+  }
+}
+```
 
 ```js
-// webpack.config.js
 const webpack = require('webpack');
 const envify = require('process-envify');
 
-[...]
+module.exports = {
   plugins: [
-    new webpack.DefinePlugin({
-      ...envify({
-        NODE_ENV: 'development',
-        PORT: 3000,
-      }),
-      // other ...
-    }),
+    new webpack.DefinePlugin(
+      envify({ BOOK_NAME: 'ECMAScript: Up and Running' }),
+    ),
   ],
-[...]
+};
 ```
 
+### Rollup (`rollup.config.js`)
+
 ```js
-// output
-const foo = () => 'development';
-const bar = () => 3000;
+import replace from '@rollup/plugin-replace';
+import envify from 'process-envify';
+
+export default {
+  plugins: [
+    replace(
+      envify({ BOOK_NAME: 'ECMAScript: Up and Running' }),
+    ),
+  ],
+};
 ```
 
-### Gulp
+### Webpack (`webpack.config.js`)
 
 ```js
-// gulpfile.js
+const webpack = require('webpack');
+const envify = require('process-envify');
+
+module.exports = {
+  plugins: [
+    new webpack.DefinePlugin(
+      envify({ BOOK_NAME: 'ECMAScript: Up and Running' }),
+    ),
+  ],
+};
+```
+
+### Gulp (`gulpfile.js`)
+
+```js
 const gulp = require('gulp');
 const replaces = require('gulp-replaces');
 const envify = require('process-envify');
 
-gulp.task('default', () => {
+function defaultTask() {
   return gulp
     .src('./src/main.js')
-    .pipe(replaces({
-      ...envify({
-        NODE_ENV: 'development',
-        PORT: 3000,
-      }),
-      // other ...
-    }))
+    .pipe(replaces(
+      envify({ BOOK_NAME: 'ECMAScript: Up and Running' }),
+    ))
     .pipe(gulp.dest('./dist'));
-});
+}
+
+exports.default = defaultTask;
 ```
 
+## Parameters
+
 ```js
-// output
-const foo = () => 'development';
-const bar = () => 3000;
+envify(data, opts);
 ```
+
+### `data`
+
+Type: `Record<string, any>`
+
+### `opts`
+
+Type: `Record<'useImportMeta', boolean>`<br>
+Example: `envify(data, { useImportMeta: true });`

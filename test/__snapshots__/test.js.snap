@@ -1,8 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`process-envify should inject strings 1`] = `
+exports[`process-envify should inject strings (import.meta) 1`] = `
 Object {
-  "process.env.NODE_ENV": "\\"test\\"",
-  "process.env.PORT": "3000",
+  "import.meta.env.BOOK_NAME": "\\"ECMAScript: Up and Running\\"",
+}
+`;
+
+exports[`process-envify should inject strings (process.env) 1`] = `
+Object {
+  "process.env.BOOK_NAME": "\\"ECMAScript: Up and Running\\"",
 }
 `;

@@ -3,12 +3,19 @@ import envify from '../src';
 process.chdir(__dirname);
 
 describe('process-envify', () => {
-  it('should inject strings', () => {
-    const env = {
-      NODE_ENV: process.env.NODE_ENV || 'development',
-      PORT: process.env.PORT || 3000,
+  it('should inject strings (process.env)', () => {
+    const data = {
+      BOOK_NAME: 'ECMAScript: Up and Running',
     };
 
-    expect(envify(env)).toMatchSnapshot();
+    expect(envify(data)).toMatchSnapshot();
+  });
+
+  it('should inject strings (import.meta)', () => {
+    const data = {
+      BOOK_NAME: 'ECMAScript: Up and Running',
+    };
+
+    expect(envify(data, { useImportMeta: true })).toMatchSnapshot();
   });
 });
