@@ -1,10 +1,10 @@
 {
   "name": "process-envify",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A process env helper for injecting strings.",
   "main": "dist/process-envify.cjs.js",
   "module": "dist/process-envify.esm.js",
-  "types": "src/process-envify.d.ts",
+  "types": "dist/process-envify.d.ts",
   "files": [
     "dist"
   ],
