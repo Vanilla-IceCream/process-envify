@@ -17,9 +17,6 @@ $ yarn add process-envify -D
 ```js
 // Input:
 const getBookName = () => process.env.BOOK_NAME;
-
-// useImportMeta: true
-const getBookName = () => import.meta.env.BOOK_NAME;
 ```
 
 ```js
@@ -34,17 +31,14 @@ envify({ BOOK_NAME: 'ECMAScript: Up and Running' });
 const getBookName = () => 'ECMAScript: Up and Running';
 ```
 
-### Vite (`vite.config.js`)
+### Vite (`vite.config.ts`)
 
-```js
+```ts
 import { defineConfig } from 'vite';
 import envify from 'process-envify';
 
 export default defineConfig({
-  define: envify(
-    { BOOK_NAME: 'ECMAScript: Up and Running' },
-    { useImportMeta: true },
-  ),
+  define: envify({ BOOK_NAME: 'ECMAScript: Up and Running' }),
 });
 ```
 

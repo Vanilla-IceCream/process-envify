@@ -1,6 +1,6 @@
 {
   "name": "process-envify",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "A process env helper for injecting strings.",
   "main": "./dist/process-envify.umd.cjs",
   "module": "./dist/process-envify.js",
@@ -26,7 +26,6 @@
   },
   "keywords": [
     "process.env",
-    "import.meta",
     "Vite",
     "Vue CLI",
     "Rollup",

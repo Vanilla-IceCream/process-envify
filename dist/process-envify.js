@@ -1,10 +1,10 @@
-const i = (t, l = {}) => {
-  const s = {}, n = Object.keys(t), r = Object.values(t);
-  for (let e = 0, u = n.length; e < u; e += 1) {
-    const o = n[e], c = JSON.stringify(r[e]);
-    l.useImportMeta ? s[`{"BASE_URL":"/","MODE":"production","DEV":false,"PROD":true}.${o}`] = c : s[`process.env.${o}`] = c;
+const i = (s) => {
+  const t = {}, n = Object.keys(s), c = Object.values(s);
+  for (let e = 0, o = n.length; e < o; e += 1) {
+    const l = n[e], r = JSON.stringify(c[e]);
+    t[`process.env.${l}`] = r;
   }
-  return s;
+  return t;
 };
 export {
   i as default

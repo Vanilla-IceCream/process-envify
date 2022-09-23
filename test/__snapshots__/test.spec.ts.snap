@@ -1,12 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`process-envify > should inject strings (import.meta) 1`] = `
-{
-  "import.meta.env.BOOK_NAME": "\\"ECMAScript: Up and Running\\"",
-}
-`;
-
-exports[`process-envify > should inject strings (process.env) 1`] = `
+exports[`process-envify > should inject strings 1`] = `
 {
   "process.env.BOOK_NAME": "\\"ECMAScript: Up and Running\\"",
 }
