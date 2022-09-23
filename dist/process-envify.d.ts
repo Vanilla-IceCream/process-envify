@@ -1,6 +1,3 @@
-interface Envify {
-  (data: Record<string, any>, opts?: { useImportMeta: boolean });
-}
-
-declare const envify: Envify;
-export default envify;
+export * from './index'
+import ProcessEnvify from './index'
+export default ProcessEnvify

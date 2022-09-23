@@ -1,6 +1,6 @@
-import envify from '../src';
+import { describe, it, expect } from 'vitest';
 
-process.chdir(__dirname);
+import envify from '../src';
 
 describe('process-envify', () => {
   it('should inject strings (process.env)', () => {

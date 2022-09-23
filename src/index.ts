@@ -1,5 +1,5 @@
-export default (data, opts = {}) => {
-  const envify = {};
+export default (data: Record<string, unknown>, opts: { useImportMeta?: boolean } = {}) => {
+  const envify = {} as Record<string, unknown>;
   const keys = Object.keys(data);
   const values = Object.values(data);
 

@@ -171,18 +171,3 @@ function defaultTask() {
 
 exports.default = defaultTask;
 ```
-
-## Parameters
-
-```js
-envify(data, opts);
-```
-
-### `data`
-
-Type: `Record<string, any>`
-
-### `opts`
-
-Type: `Record<'useImportMeta', boolean>`<br>
-Example: `envify(data, { useImportMeta: true });`
